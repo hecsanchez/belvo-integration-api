@@ -11,7 +11,7 @@ const PASSWORD = 'aOm3LokBYwSHNHP40Oq4gj6qVQ1Hvzyyb@cHoi-QMmOyju9JA7M31QyuiPqq2Q
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000, http://belvo-demo.s3-website-us-east-1.amazonaws.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://belvo-demo.s3-website-us-east-1.amazonaws.com');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
