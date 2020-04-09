@@ -5,13 +5,13 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 
-const BASE_URL = 'https://sandbox.belvo.co/api';
-const USER = '20a17f47-9c76-4001-a8a6-baaacb841324';
-const PASSWORD = 'aOm3LokBYwSHNHP40Oq4gj6qVQ1Hvzyyb@cHoi-QMmOyju9JA7M31QyuiPqq2Q2b';
+const BASE_URL = 'https://api.belvo.co/api';
+const USER = '5b05fe36-cfaa-479f-84d8-6a3e1bc75275';
+const PASSWORD = 'eY0EC#fGEWHtXpof58OAiaMHST3g6lLFykVlZCZ_HbxZ#-3A5eMeCe7UvpZ58vIE';
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://belvo-demo.s3-website-us-east-1.amazonaws.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://belvo.hectorsanchez.mx:3000');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -109,6 +109,29 @@ app.post("/balances", (req, res, next) => {
 app.post("/owners", (req, res, next) => {
     axios.post(`${BASE_URL}/owners/`, {
         link: req.body.link
+    }, {
+        auth: {
+            username: USER,
+            password: PASSWORD
+        }
+    })
+    .then(response => {
+        res.json(response.data);
+    })
+    .catch(error => {
+        res.status(500).send({
+            message: error.toJSON().message
+        });
+    });
+});
+
+app.post("/statements", (req, res, next) => {
+    axios.post(`${BASE_URL}/api/statements/`, {
+        link: req.body.link,
+        account: req.body.accountId,
+        year: '2019',
+        month: '10',
+        attach_pdf: true
     }, {
         auth: {
             username: USER,
